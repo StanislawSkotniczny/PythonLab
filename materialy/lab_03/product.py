@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
-"""Klasa Product -- zadanie do samodzielnego wykonania."""
-
+# ========================================
+# Szkielet pliku: product.py
+# Uzupelnij implementacje!
+# ========================================
 
 class Product:
     """Reprezentuje produkt w sklepie internetowym."""
@@ -8,32 +9,36 @@ class Product:
     def __init__(self, name: str, price: float, quantity: int):
         # TODO: Zapisz atrybuty name, price, quantity
         # Pamietaj o walidacji: price >= 0, quantity >= 0
-        pass
+        if quantity < 0:
+            raise ValueError("nie  moze byc ujemna ilosc produktu") 
+
+        if price < 0:
+            raise ValueError("nie  moze byc cena na -")
+        
+        self.name = name
+        self.price = price
+        self.quantity = quantity
 
     def add_stock(self, amount: int):
-        """Dodaje okreslona ilosc produktow do magazynu.
-
-        Raises:
-            ValueError: jesli amount jest ujemne
-        """
-        # TODO: Zaimplementuj dodawanie do magazynu
-        pass
+        # TODO: Dodaj ilosc do magazynu. Rzuc ValueError jesli amount < 0
+        if amount < 0:
+            raise ValueError("nie  moze byc ujemna ilosc produktu")
+        self.quantity += amount
 
     def remove_stock(self, amount: int):
-        """Usuwa okreslona ilosc produktow z magazynu.
-
-        Raises:
-            ValueError: jesli amount jest ujemne lub wieksze niz dostepna ilosc
-        """
-        # TODO: Zaimplementuj usuwanie z magazynu
-        pass
+        # TODO: Usun ilosc z magazynu.
+        # Rzuc ValueError jesli amount < 0 lub amount > quantity
+        if amount < 0:
+            raise ValueError("nie  moze byc ujemna ilosc produktu")
+        if amount > self.quantity:
+            raise ValueError("nie ma tylu produktow w magazynie")
+        self.quantity -= amount
 
     def is_available(self) -> bool:
-        """Zwraca True jesli produkt jest dostepny (quantity > 0)."""
-        # TODO: Zaimplementuj sprawdzanie dostepnosci
-        pass
+        # TODO: Zwroc True jesli quantity > 0
+        if self.quantity > 0:
+            return True
 
     def total_value(self) -> float:
-        """Zwraca calkowita wartosc produktow w magazynie (price * quantity)."""
-        # TODO: Zaimplementuj obliczanie wartosci
-        pass
+        # TODO: Zwroc price * quantity
+        return self.price * self.quantity
